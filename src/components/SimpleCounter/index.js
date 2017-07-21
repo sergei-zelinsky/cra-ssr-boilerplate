@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 class SimpleCounter extends Component {
+  componentWillMount(){
+    this.props.fetchInitialValue();
+  }
+
   render(){
     const {value, onIncrement, onDecrement} = this.props;
     return (

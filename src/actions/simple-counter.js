@@ -1,6 +1,7 @@
 import {
   INCREMENT,
-  DECREMENT
+  DECREMENT,
+  FETCH_INITIAL_VALUE_REQUEST
 } from 'constants/action-types';
 
 export function increment(){
@@ -12,5 +13,11 @@ export function increment(){
 export function decrement(){
   return {
     type: DECREMENT
+  };
+}
+
+export function fetchInitialValue(){
+  return {
+    type: FETCH_INITIAL_VALUE_REQUEST
   };
 }
