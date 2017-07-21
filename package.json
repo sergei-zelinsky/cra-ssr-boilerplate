@@ -3,19 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-loader": "^7.1.1",
     "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
     "express": "^4.15.3",
+    "ignore-loader": "^0.1.2",
     "ignore-styles": "^5.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-scripts": "1.0.10",
     "redux": "^3.7.2",
-    "redux-saga": "^0.15.4"
+    "redux-saga": "^0.15.4",
+    "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
     "start": "NODE_PATH='./src' react-scripts start",

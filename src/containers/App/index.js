@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SimpleCounter from 'containers/SimpleCounter';
 import logo from './logo.svg';
-import './App.css';
+import './index.css';
 
 class App extends Component {
   render() {

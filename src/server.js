@@ -1,16 +1,17 @@
 import 'babel-polyfill';
-import 'ignore-styles';
 import express from 'express';
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {createStore, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
-import createSagaMiddleware, {END} from 'redux-saga';
 import rootSaga from 'sagas';
-import rootReducer from 'reducers';
-import App from './App';
+import configureStore from 'store/configureStore';
+import Root from 'containers/Root';
+import path from 'path';
 
 const app = express();
+
+const __ROOT_DIR__ = process.cwd();
+
+app.use('/static', express.static(path.resolve(__ROOT_DIR__, 'build', 'static')));
 
 
 const layout = (body, initialState) => (`
@@ -21,33 +22,31 @@ const layout = (body, initialState) => (`
     <title>CRA SSR Boilerplate</title>
   </head>
   <body>
-    <div id="root"><div>${body}</div></div>
+    <div id="root">${body}</div>
     <script type="text/javascript" charset="utf-8">
       window.__INITIAL_STATE__ = ${initialState};
     </script>
+    <script src="http://localhost:3000/static/js/bundle.js"></script>
   </body>
   </html>
 `);
 
-app.use((req, res) => {
-  const sagaMiddleware = createSagaMiddleware();
-  const store = createStore(
-    rootReducer,
-    applyMiddleware(sagaMiddleware)
-  );
+app.get('/', (req, res) => {
+  const store = configureStore();
 
   const rootElement = (
-    <Provider store={store}>
-      <App/>
-    </Provider>
+    <Root
+      store={store}
+    />
   );
 
-  sagaMiddleware.run(rootSaga).done.then(() => {
-    res.end(renderToString(rootElement));
+  store.runSaga(rootSaga).done.then(() => {
+    const renderedMarkup = renderToString(rootElement);
+    res.end(layout(renderedMarkup, JSON.stringify(store.getState())));
   });
 
   renderToString(rootElement);
-  store.dispatch(END);
+  store.close();
 
 });
 
