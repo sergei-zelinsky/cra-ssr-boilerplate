@@ -5,7 +5,13 @@ import configureStore from 'store/configureStore';
 import Root from 'containers/Root';
 import './index.css';
 
-const initialState = JSON.parse(document.getElementById('initial-state').textContent);
+let initialState;
+
+try {
+  initialState = JSON.parse(document.getElementById('initial-state').textContent);
+} catch (e){
+  initialState = {};
+}
 
 const store = configureStore(initialState);
 
