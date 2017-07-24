@@ -5,7 +5,9 @@ import configureStore from 'store/configureStore';
 import Root from 'containers/Root';
 import './index.css';
 
-const store = configureStore(window.__INITIAL_STATE__);
+const initialState = JSON.parse(document.getElementById('initial-state').textContent);
+
+const store = configureStore(initialState);
 
 store.runSaga(rootSaga);
 

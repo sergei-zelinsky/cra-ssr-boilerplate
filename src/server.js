@@ -6,30 +6,15 @@ import rootSaga from 'sagas';
 import configureStore from 'store/configureStore';
 import Root from 'containers/Root';
 import path from 'path';
+import fs from 'fs';
 
 const app = express();
 
 const __ROOT_DIR__ = process.cwd();
 
+const htmlTemplate = fs.readFileSync(path.resolve(__ROOT_DIR__, 'build', 'index.html'), 'utf-8');
+
 app.use('/static', express.static(path.resolve(__ROOT_DIR__, 'build', 'static')));
-
-
-const layout = (body, initialState) => (`
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <meta charset="UTF-8"/>
-    <title>CRA SSR Boilerplate</title>
-  </head>
-  <body>
-    <div id="root">${body}</div>
-    <script type="text/javascript" charset="utf-8">
-      window.__INITIAL_STATE__ = ${initialState};
-    </script>
-    <script src="http://localhost:3000/static/js/bundle.js"></script>
-  </body>
-  </html>
-`);
 
 app.get('/', (req, res) => {
   const store = configureStore();
@@ -42,7 +27,13 @@ app.get('/', (req, res) => {
 
   store.runSaga(rootSaga).done.then(() => {
     const renderedMarkup = renderToString(rootElement);
-    res.end(layout(renderedMarkup, JSON.stringify(store.getState())));
+    const initialState = JSON.stringify(store.getState());
+
+    const renderedHTML = htmlTemplate
+      .replace('{{HTML_MARKUP}}', renderedMarkup)
+      .replace('{{INITIAL_STATE}}', initialState);
+
+    res.end(renderedHTML);
   });
 
   renderToString(rootElement);
