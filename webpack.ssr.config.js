@@ -1,5 +1,8 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const webpack = require('webpack');
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
   entry: './server/index.js',
@@ -31,6 +34,11 @@ module.exports = {
       { test: /\.css$/, loader: 'ignore-loader' }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+    })
+  ],
   resolve: {
     modules: ['src', 'node_modules']
   }
