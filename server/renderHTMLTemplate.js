@@ -1,16 +1,35 @@
 import path from 'path';
 import fs from 'fs';
 
-const __ROOT_DIR__ = process.cwd();
+// use script from create-react-app dev-server
+const devHTMLTemplate = params => `
+    <html>
+    <head>
+        <title>CRA SSR Boilerplate</title>
+    </head>
+    <body>
+        <div id="root">${params.htmlMarkup}</div>
+        <script type="application/json" id="initial-state">${params.initialState}</script>
+        <script src="http://localhost:3000/static/js/bundle.js"></script>
+    </body>
+    </html>
+  `;
 
-const htmlTemplateFilePath = path.resolve(__ROOT_DIR__, 'build', 'index.html');
+const prodHTMLTemplate = params => {
+  const __ROOT_DIR__ = process.cwd();
+  const templatePath = path.resolve(__ROOT_DIR__, 'build', 'index.html');
+  const htmlTemplate = fs.readFileSync(templatePath, 'utf-8');
 
-const htmlTemplate = fs.readFileSync(htmlTemplateFilePath, 'utf-8');
-
-function renderHTMLTemplate(params){
   return htmlTemplate
     .replace('{{HTML_MARKUP}}', params.htmlMarkup)
     .replace('{{INITIAL_STATE}}', params.initialState)
+};
+
+
+function resolveHTMLTemplate(){
+  return process.env.NODE_ENV === 'production'
+    ? prodHTMLTemplate
+    : devHTMLTemplate;
 }
 
-export default renderHTMLTemplate;
+export default resolveHTMLTemplate();
