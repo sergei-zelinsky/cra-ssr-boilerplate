@@ -30,5 +30,8 @@
     "eject": "react-scripts eject",
     "ssr-info": "echo \"[INFO] 'parallel' is used from 'moreutils' package. If you do not have this package you need to install it. Use 'sudo apt-get install moreutils' on Linux or 'brew install moreutils' on MacOS\"",
     "ssr": "npm run ssr-info && parallel -j 2 -- 'webpack --config webpack.ssr.config.js --progress --watch' 'nodemon --delay 500ms build/server.js';"
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^0.17.4"
   }
 }
