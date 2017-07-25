@@ -27,13 +27,16 @@ class FakeRouteResolver {
 
 export default class extends Component {
   render(){
+    const {pathname} = this.props.location;
     const AsyncComponent = asyncComponent({
       resolve: () => {
-        return FakeRouteResolver.resolveRouteInformation(this.props.location.pathname)
+        return FakeRouteResolver.resolveRouteInformation(pathname)
           .then(({modulePath}) => getComponentImportPromise(modulePath))
       },
       LoadingComponent: ({ match }) => <div>Resolving {match.url}</div>
     });
-    return <AsyncComponent {...this.props}/>
+    return (
+      <div><AsyncComponent {...this.props}/></div>
+    );
   }
 }

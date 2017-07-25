@@ -13,6 +13,7 @@
     "ignore-loader": "^0.1.2",
     "ignore-styles": "^5.0.1",
     "react": "^15.6.1",
+    "react-async-bootstrapper": "^1.1.1",
     "react-async-component": "^1.0.0-beta.3",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
