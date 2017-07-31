@@ -24,6 +24,7 @@ const prodHTMLTemplate = params => {
   return htmlTemplate
     .replace('{{HTML_MARKUP}}', params.htmlMarkup)
     .replace('{{INITIAL_STATE}}', params.initialState)
+    .replace('{{ASYNC_STATE}}', params.asyncState)
 };
 
 

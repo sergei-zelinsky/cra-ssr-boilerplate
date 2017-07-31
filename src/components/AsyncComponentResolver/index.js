@@ -1,12 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {asyncComponent} from 'react-async-component';
 
-function getComponentImportPromise(route){
-  if (route === 'components/About'){
-    return import('components/About')
-  }
-  return import('components/Home');
-}
+const asyncComponents = {
+  'components/Home':  () => import('components/Home'),
+  'components/About': () => import('components/About')
+};
 
 class FakeRouteResolver {
   static resolveRouteInformation(url) {
@@ -18,6 +16,7 @@ class FakeRouteResolver {
       case '/my-seo-friendly-url-for-about-page':
         modulePath = 'components/About';
         break;
+
       default:
         modulePath = 'components/Home';
     }
@@ -25,18 +24,13 @@ class FakeRouteResolver {
   }
 }
 
-export default class extends Component {
-  render(){
-    const {pathname} = this.props.location;
-    const AsyncComponent = asyncComponent({
-      resolve: () => {
-        return FakeRouteResolver.resolveRouteInformation(pathname)
-          .then(({modulePath}) => getComponentImportPromise(modulePath))
-      },
-      LoadingComponent: ({ match }) => <div>Resolving {match.url}</div>
-    });
-    return (
-      <div><AsyncComponent {...this.props}/></div>
-    );
-  }
-}
+export default asyncComponent({
+  resolve: (props) => {
+    return FakeRouteResolver.resolveRouteInformation(props.location.pathname)
+      .then(({modulePath}) => {
+        console.log('modulePath', modulePath);
+        return asyncComponents[modulePath]()
+      })
+  },
+  LoadingComponent: ({ match }) => <div>Resolving {match.url}</div>
+});

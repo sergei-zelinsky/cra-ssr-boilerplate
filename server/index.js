@@ -11,8 +11,6 @@ app.use('/static', proxy({target: `http://${webpackDevServerHost}`, changeOrigin
 
 app.get('*', reactSSRMiddleware);
 
-
-
 app.use(proxy(`ws://${webpackDevServerHost}`, {changeOrigin:true}));
 
 app.listen(4000, error => {
