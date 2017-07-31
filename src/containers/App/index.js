@@ -5,7 +5,7 @@ import {
   Link,
   Switch
 } from 'react-router-dom'
-import AsyncComponentResolver from 'components/AsyncComponentResolver';
+import AsyncComponentResolver from 'containers/AsyncComponentResolver';
 import logo from './logo.svg';
 import './index.css';
 
@@ -34,6 +34,7 @@ class App extends Component {
             </li>
           </nav>
         </div>
+
         <Switch>
           <Route path="*" component={AsyncComponentResolver}/>
         </Switch>

@@ -6,9 +6,13 @@ import Root from 'containers/Root';
 import { AsyncComponentProvider, createAsyncContext } from 'react-async-component';
 import asyncBootstrapper from 'react-async-bootstrapper';
 import renderHTMLTemplate from '../renderHTMLTemplate';
+import PageInformationAPI from 'services/PageInformationAPI';
 
-function reactSSRMiddleware(req, res){
-  const store = configureStore();
+async function reactSSRMiddleware(req, res){
+  const pageInformation = await PageInformationAPI.fetchPageInformation(req.url);
+  const store = configureStore({
+    pageInformation
+  });
   const context = {};
 
   const asyncContext = createAsyncContext();

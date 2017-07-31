@@ -1,36 +1,31 @@
-import React from 'react';
-import {asyncComponent} from 'react-async-component';
+import React, {Component} from 'react';
+import AsyncHome from 'components/AsyncHome';
+import AsyncAbout from 'components/AsyncAbout';
 
-const asyncComponents = {
-  'components/Home':  () => import('components/Home'),
-  'components/About': () => import('components/About')
+const MAP_PAGE_TO_COMPONENT = {
+  'Home': AsyncHome,
+  'About': AsyncAbout
 };
 
-class FakeRouteResolver {
-  static resolveRouteInformation(url) {
-    let modulePath;
-    switch (url){
-      case '/my-seo-friendly-url-for-home-page':
-        modulePath = 'components/Home';
-        break;
-      case '/my-seo-friendly-url-for-about-page':
-        modulePath = 'components/About';
-        break;
-
-      default:
-        modulePath = 'components/Home';
+class AsyncComponentResolver extends Component {
+  componentWillReceiveProps(nextProps){
+    if (typeof window !== 'undefined' && nextProps.location !== this.props.location){
+      this.props.fetchPageInformation(nextProps.location.pathname)
     }
-    return new Promise(resolve => setTimeout(() => resolve({modulePath}), 500))
+  }
+
+  render(){
+    const {pageInformation, ...rest} = this.props;
+    if (!pageInformation.page){
+      return null;
+    }
+    const ResolvedComponent = MAP_PAGE_TO_COMPONENT[pageInformation.page];
+    console.log('PAGEINFORMATION]', pageInformation);
+    return (
+      <ResolvedComponent {...rest}/>
+    );
   }
 }
 
-export default asyncComponent({
-  resolve: (props) => {
-    return FakeRouteResolver.resolveRouteInformation(props.location.pathname)
-      .then(({modulePath}) => {
-        console.log('modulePath', modulePath);
-        return asyncComponents[modulePath]()
-      })
-  },
-  LoadingComponent: ({ match }) => <div>Resolving {match.url}</div>
-});
+export default AsyncComponentResolver;
+
