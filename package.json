@@ -9,6 +9,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
+    "chalk": "^2.0.1",
     "express": "^4.15.3",
     "ignore-loader": "^0.1.2",
     "ignore-styles": "^5.0.1",
@@ -32,7 +33,6 @@
     "eject": "react-scripts eject",
     "watch-ssr": "parallel -j 2 -- 'node scripts/watch-ssr.js' 'nodemon --delay 500ms build/server.js';",
     "build-ssr": "node scripts/build-ssr.js"
-
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
