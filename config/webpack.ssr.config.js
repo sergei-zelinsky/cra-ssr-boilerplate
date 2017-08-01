@@ -7,7 +7,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 module.exports = {
   entry: './server/index.js',
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.resolve(__dirname, '..', 'build'),
     filename: 'server.js'
   },
   target: 'node',
