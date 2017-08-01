@@ -5,17 +5,21 @@ import configureStore from 'store/configureStore';
 import Root from 'containers/Root';
 import { AsyncComponentProvider, createAsyncContext } from 'react-async-component';
 import asyncBootstrapper from 'react-async-bootstrapper';
-import renderHTMLTemplate from '../renderHTMLTemplate';
+import renderHTMLTemplate from '../template';
 import PageInformationAPI from 'services/PageInformationAPI';
 
 async function reactSSRMiddleware(req, res){
+  // fetch information about current url for supporting SEO-friendly URLs
   const pageInformation = await PageInformationAPI.fetchPageInformation(req.url);
+
   const store = configureStore({
     pageInformation
   });
+
   const context = {};
 
   const asyncContext = createAsyncContext();
+
   const rootElement = (
     <AsyncComponentProvider asyncContext={asyncContext}>
       <Root
@@ -40,8 +44,10 @@ async function reactSSRMiddleware(req, res){
         asyncState
       }));
     });
-
+    // make initial rendering to invoke all sagas which have to collect initial data
+    // needed for rendering
     renderToString(rootElement);
+    // send END action to require all sagas termination
     store.close();
 
     // redirect user if need
