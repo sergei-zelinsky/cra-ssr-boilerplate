@@ -21,6 +21,7 @@
     "react-scripts": "1.0.10",
     "redux": "^3.7.2",
     "redux-saga": "^0.15.4",
+    "serialize-javascript": "^1.4.0",
     "webpack": "^3.3.0",
     "webpack-node-externals": "^1.6.0"
   },

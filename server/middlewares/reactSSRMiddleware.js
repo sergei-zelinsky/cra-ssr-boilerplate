@@ -34,12 +34,12 @@ async function reactSSRMiddleware(req, res){
   asyncBootstrapper(rootElement).then(() => {
     // wait while all tasks will be done
     store.runSaga(rootSaga).done.then(() => {
-      const htmlMarkup = renderToString(rootElement);
-      const initialState = JSON.stringify(store.getState());
-      const asyncState = JSON.stringify(asyncContext.getState());
+      const appString = renderToString(rootElement);
+      const initialState = store.getState();
+      const asyncState = asyncContext.getState();
       // send rendered html to the client
       res.end(renderHTMLTemplate({
-        htmlMarkup,
+        appString,
         initialState,
         asyncState
       }));

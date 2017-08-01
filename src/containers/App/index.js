@@ -29,9 +29,6 @@ class App extends Component {
             <li>
               <Link to="/my-seo-friendly-url-for-about-page">About page</Link>
             </li>
-            <li>
-              <Link to="/some-another-route">Some another page</Link>
-            </li>
           </nav>
         </div>
 
