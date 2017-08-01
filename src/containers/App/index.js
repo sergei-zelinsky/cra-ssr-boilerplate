@@ -3,25 +3,11 @@ import SimpleCounter from 'containers/SimpleCounter';
 import {
   Route,
   Link,
-  Redirect,
   Switch
 } from 'react-router-dom'
+import AsyncComponentResolver from 'containers/AsyncComponentResolver';
 import logo from './logo.svg';
 import './index.css';
-
-const Home = ({match}) => (
-  <div>
-    <h2>Home page</h2>
-    <p>You are on the Home page: {match.url}</p>
-  </div>
-);
-
-const About = ({match}) => (
-  <div>
-    <h2>About page</h2>
-    <p>You are on the About page: {match.url}</p>
-  </div>
-);
 
 class App extends Component {
   render() {
@@ -38,20 +24,19 @@ class App extends Component {
           <nav>
             <h3>Navigation</h3>
             <li>
-              <Link to="/">Home page</Link>
+              <Link to="/my-seo-friendly-url-for-home-page">Home page</Link>
             </li>
             <li>
-              <Link to="/about">About page</Link>
+              <Link to="/my-seo-friendly-url-for-about-page">About page</Link>
             </li>
             <li>
               <Link to="/some-another-route">Some another page</Link>
             </li>
           </nav>
         </div>
+
         <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/about" component={About}/>
-          <Redirect to="/"/>
+          <Route path="*" component={AsyncComponentResolver}/>
         </Switch>
       </div>
     );

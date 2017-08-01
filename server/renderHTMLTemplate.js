@@ -10,7 +10,8 @@ const devHTMLTemplate = params => `
     <body>
         <div id="root">${params.htmlMarkup}</div>
         <script type="application/json" id="initial-state">${params.initialState}</script>
-        <script src="http://localhost:3000/static/js/bundle.js"></script>
+        <script type="application/json" id="async-state">${params.asyncState}</script>
+        <script src="/static/js/bundle.js"></script>
     </body>
     </html>
   `;
@@ -23,6 +24,7 @@ const prodHTMLTemplate = params => {
   return htmlTemplate
     .replace('{{HTML_MARKUP}}', params.htmlMarkup)
     .replace('{{INITIAL_STATE}}', params.initialState)
+    .replace('{{ASYNC_STATE}}', params.asyncState)
 };
 
 

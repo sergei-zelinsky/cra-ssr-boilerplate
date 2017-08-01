@@ -1,17 +1,17 @@
 import 'babel-polyfill';
 import express from 'express';
-import path from 'path';
 import reactSSRMiddleware from './middlewares/reactSSRMiddleware';
+import proxy from 'http-proxy-middleware';
 
 const app = express();
+const webpackDevServerHost = 'localhost:3000';
 
-const __ROOT_DIR__ = process.cwd();
 
-const staticDirectoryPath = path.resolve(__ROOT_DIR__, 'build', 'static');
-
-app.use('/static', express.static(staticDirectoryPath));
+app.use('/static', proxy({target: `http://${webpackDevServerHost}`, changeOrigin: true}));
 
 app.get('*', reactSSRMiddleware);
+
+app.use(proxy(`ws://${webpackDevServerHost}`, {changeOrigin:true}));
 
 app.listen(4000, error => {
   if (error){
