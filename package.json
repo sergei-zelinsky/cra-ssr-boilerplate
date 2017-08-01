@@ -30,8 +30,8 @@
     "build": "NODE_PATH='./src' react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "watch-ssr": "parallel -j 2 -- 'babel-node scripts/watch-ssr.js --presets es2015,stage-2' 'nodemon --delay 500ms build/server.js';",
-    "build-ssr": "babel-node scripts/build-ssr.js --presets es2015,stage-2"
+    "watch-ssr": "parallel -j 2 -- 'node scripts/watch-ssr.js' 'nodemon --delay 500ms build/server.js';",
+    "build-ssr": "node scripts/build-ssr.js"
 
   },
   "devDependencies": {

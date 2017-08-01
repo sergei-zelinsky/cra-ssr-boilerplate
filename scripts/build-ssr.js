@@ -1,9 +1,11 @@
-import webpack from 'webpack';
-import config from '../config/webpack.ssr.config';
+'use strict';
 
-process.env.NODE_ENV = 'production';
+process.env['NODE_ENV'] = 'production';
 
-console.log(`\nBuilding production bundle...\n`);
+const webpack = require('webpack');
+const config = require('../config/webpack.ssr.config');
+
+console.log('\nCreating production SSR build...\n');
 
 const compiler = webpack(config);
 
@@ -29,6 +31,6 @@ compiler.run((err, stats) => {
     colors: true
   });
   console.log(statsString);
-
+''
   console.log('\nBuild successful!');
 });
