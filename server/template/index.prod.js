@@ -1,15 +1,26 @@
-import path from 'path';
-import fs from 'fs';
 import serialize from 'serialize-javascript';
+import assetManifest from '../../build/asset-manifest.json';
 
-const __ROOT_DIR__ = process.cwd();
-
-const templatePath = path.resolve(__ROOT_DIR__, 'build', 'index.html');
-
-const htmlTemplate = fs.readFileSync(templatePath, 'utf-8');
-
-// TODO: use own HTML-template instead template from build/index.html
-export default params => htmlTemplate
-  .replace('{{APP_STRING}}', params.appString)
-  .replace(`"{{INITIAL_STATE}}"`, serialize(params.initialState))
-  .replace(`"{{ASYNC_COMPONENTS_STATE}}"`, serialize(params.asyncState));
+export default params => `
+  <html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport"
+            content="width=device-width,initial-scale=1,shrink-to-fit=no">
+      <meta name="theme-color" content="#000000">
+      <link rel="manifest" href="/manifest.json">
+      <link rel="shortcut icon" href="/favicon.ico">
+      <title>CRA SSR Boilerplate</title>
+      <link href="${assetManifest['main.css']}" rel="stylesheet">
+  </head>
+  <body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <script type="text/javascript">
+    window.INITIAL_STATE = ${serialize(params.initialState)};
+    window.ASYNC_COMPONENTS_STATE = ${serialize(params.asyncState)}
+  </script>
+  <div id="root">${params.appString}</div>
+  <script type="text/javascript" src="${assetManifest['main.js']}"></script>
+  </body>
+  </html>
+`;
