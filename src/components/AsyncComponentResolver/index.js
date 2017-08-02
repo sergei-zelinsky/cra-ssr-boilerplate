@@ -28,7 +28,6 @@ class AsyncComponentResolver extends Component {
       return null;
     }
     const ResolvedComponent = MAP_PAGE_TO_COMPONENT[pageInformation.page];
-    console.log('PAGEINFORMATION]', pageInformation);
     return (
       <ResolvedComponent {...rest}/>
     );
