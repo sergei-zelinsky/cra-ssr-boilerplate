@@ -9,6 +9,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
+    "chalk": "^2.0.1",
     "express": "^4.15.3",
     "ignore-loader": "^0.1.2",
     "ignore-styles": "^5.0.1",
@@ -21,6 +22,7 @@
     "react-scripts": "1.0.10",
     "redux": "^3.7.2",
     "redux-saga": "^0.15.4",
+    "serialize-javascript": "^1.4.0",
     "webpack": "^3.3.0",
     "webpack-node-externals": "^1.6.0"
   },
@@ -29,8 +31,8 @@
     "build": "NODE_PATH='./src' react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "ssr-info": "echo \"[INFO] 'parallel' is used from 'moreutils' package. If you do not have this package you need to install it. Use 'sudo apt-get install moreutils' on Linux or 'brew install moreutils' on MacOS\"",
-    "ssr": "npm run ssr-info && parallel -j 2 -- 'webpack --config webpack.ssr.config.js --progress --watch' 'nodemon --delay 500ms build/server.js';"
+    "watch-ssr": "parallel -j 2 -- 'node scripts/watch-ssr.js' 'nodemon --delay 500ms build/server.js';",
+    "build-ssr": "node scripts/build-ssr.js"
   },
   "devDependencies": {
     "http-proxy-middleware": "^0.17.4"

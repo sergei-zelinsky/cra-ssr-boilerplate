@@ -7,22 +7,15 @@ import { AsyncComponentProvider } from 'react-async-component';
 import asyncBootstrapper from 'react-async-bootstrapper';
 import './index.css';
 
+const initialState = window.INITIAL_STATE;
 
-let initialState;
-
-try {
-  initialState = JSON.parse(document.getElementById('initial-state').textContent);
-} catch (e){
-  initialState = {};
-}
+const rehydrateState = window.ASYNC_COMPONENTS_STATE;
 
 const store = configureStore(initialState);
 
 store.runSaga(rootSaga);
 
 const MOUNT = document.getElementById('root');
-
-const rehydrateState = JSON.parse(document.getElementById('async-state').textContent);
 
 const app = (
   <AsyncComponentProvider rehydrateState={rehydrateState}>
