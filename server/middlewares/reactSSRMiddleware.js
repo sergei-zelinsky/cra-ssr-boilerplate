@@ -7,6 +7,7 @@ import { AsyncComponentProvider, createAsyncContext } from 'react-async-componen
 import asyncBootstrapper from 'react-async-bootstrapper';
 import renderHTMLTemplate from '../template';
 import PageInformationAPI from 'services/PageInformationAPI';
+import Helmet from 'react-helmet';
 
 async function reactSSRMiddleware(req, res){
   // fetch information about current url for supporting SEO-friendly URLs
@@ -37,11 +38,15 @@ async function reactSSRMiddleware(req, res){
       const appString = renderToString(rootElement);
       const initialState = store.getState();
       const asyncState = asyncContext.getState();
+      // retrieve helmet properties to inject in html
+      const helmet = Helmet.renderStatic();
+
       // send rendered html to the client
       res.end(renderHTMLTemplate({
         appString,
         initialState,
-        asyncState
+        asyncState,
+        helmet
       }));
     });
     // make initial rendering to invoke all sagas which have to collect initial data

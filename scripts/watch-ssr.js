@@ -16,7 +16,7 @@ console.log(chalk.magenta('[INFO] ') +'If you do not have this package you need 
 console.log(
   chalk.magenta('[INFO] ') +
   'Use ' + chalk.underline('sudo apt-get install moreutils') + ' on Linux' +
-  ' or ' + chalk.underline('brew install moreutils') + ' on OSX'
+  ' or ' + chalk.underline('brew install moreutils') + ' on OSX.'
 );
 
 console.log(

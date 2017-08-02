@@ -1,15 +1,24 @@
 import serialize from 'serialize-javascript';
 
-export default params => `
-    <html>
-    <head></head>
-    <body>
-        <script type="text/javascript">
-            window.INITIAL_STATE = ${serialize(params.initialState)};
-            window.ASYNC_COMPONENTS_STATE = ${serialize(params.asyncState)};
-        </script>
-        <div id="root">${params.appString}</div>
-        <script src="/static/js/bundle.js"></script>
-    </body>
-    </html>
+export default props => `
+  <!doctype html>
+  <html ${props.helmet.htmlAttributes.toString()}>
+  <head>
+    ${props.helmet.title.toString()}
+    ${props.helmet.meta.toString()}
+    ${props.helmet.link.toString()}
+    ${props.helmet.base.toString()}
+    ${props.helmet.style.toString()}
+    ${props.helmet.script.toString()}
+  </head>
+  <body ${props.helmet.bodyAttributes.toString()}>
+    ${props.helmet.noscript.toString()}
+    <script type="text/javascript">
+      window.INITIAL_STATE = ${serialize(props.initialState)};
+      window.ASYNC_COMPONENTS_STATE = ${serialize(props.asyncState)};
+    </script>
+    <div id="root">${props.appString}</div>
+    <script src="/static/js/bundle.js"></script>
+  </body>
+  </html>
 `;
