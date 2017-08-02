@@ -10,7 +10,6 @@ export default params => `
       <meta name="theme-color" content="#000000">
       <link rel="manifest" href="/manifest.json">
       <link rel="shortcut icon" href="/favicon.ico">
-      <title>CRA SSR Boilerplate</title>
       <link href="${assetManifest['main.css']}" rel="stylesheet">
   </head>
   <body>

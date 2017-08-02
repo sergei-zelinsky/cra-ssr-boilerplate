@@ -2,9 +2,7 @@ import serialize from 'serialize-javascript';
 
 export default params => `
     <html>
-    <head>
-        <title>CRA SSR Boilerplate</title>
-    </head>
+    <head></head>
     <body>
         <script type="text/javascript">
             window.INITIAL_STATE = ${serialize(params.initialState)};

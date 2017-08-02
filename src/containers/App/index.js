@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom'
 import AsyncComponentResolver from 'containers/AsyncComponentResolver';
+import Helmet from 'react-helmet';
 import logo from './logo.svg';
 import './index.css';
 
@@ -13,6 +14,10 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Helmet>
+          <title>CRA SSR Boilerplate page title</title>
+          <meta property="og:title" content="CRA SSR Boilerplate page title"/>
+        </Helmet>
         <div className="App">
           <div className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
