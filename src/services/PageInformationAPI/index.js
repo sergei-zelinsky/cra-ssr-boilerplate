@@ -7,9 +7,14 @@ const MOCKED_PAGE_INFORMATION = {
   }
 };
 
+const DEFAULT_PAGE_INFORMATION = {
+  page: 'Home'
+};
+
 export default class PageInformationAPI {
   static fetchPageInformation(pathname) {
-    const pageInformation = MOCKED_PAGE_INFORMATION[pathname];
+    const pageInformation = MOCKED_PAGE_INFORMATION[pathname]
+      || DEFAULT_PAGE_INFORMATION;
     return new Promise(resolve => setTimeout(() => resolve(pageInformation), 500))
   }
 }
