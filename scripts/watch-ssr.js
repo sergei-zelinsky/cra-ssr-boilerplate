@@ -4,32 +4,28 @@ process.stdout.isTTY = true;
 
 process.env['NODE_ENV'] = 'development';
 
-const webpack = require('webpack');
-const config = require('../config/webpack.ssr.config');
+const path = require('path');
+const compiler = require('./utils/compiler').default;
+const compilerConfig = require('./utils/compiler').config;
+const spawnNodemon = require('./utils/nodemon').default;
 const chalk = require('chalk');
 
 console.log(
-  chalk.magenta('[INFO] ') + chalk.underline('parallel') +
-  ' is provided by ' + chalk.underline('moreutils') + ' package.'
-);
-console.log(chalk.magenta('[INFO] ') +'If you do not have this package you need to install it.');
-console.log(
-  chalk.magenta('[INFO] ') +
-  'Use ' + chalk.underline('sudo apt-get install moreutils') + ' on Linux' +
-  ' or ' + chalk.underline('brew install moreutils') + ' on OSX.'
-);
-
-console.log(
-  chalk.magenta('\n[INFO] ') + 'For correct work you have to start' +
+  chalk.magenta('\n[INFO]') + ' For correct work you have to start' +
   ' your ' + chalk.underline('create-react-app') + ' server with '+
   chalk.underline('npm start') + ' command.'
 );
 
+const bundlePath = path.resolve(
+  compilerConfig.output.path,
+  compilerConfig.output.filename
+);
+
+let nodemon;
+
 console.log(chalk.cyan('\nWebpack starts to build and watch your files...\n'));
 
-const compiler = webpack(config);
-
-compiler.watch({/* watch options */}, (err, stats) => {
+compiler.watch(null, (err, stats) => {
   if (err) {
     console.error(err.stack || err);
     if (err.details) {
@@ -47,11 +43,20 @@ compiler.watch({/* watch options */}, (err, stats) => {
   if (stats.hasWarnings()) {
     console.warn(info.warnings)
   }
+
   const statsString = stats.toString({
     colors: true
   });
+
   console.log(statsString);
+
   console.log(
-    chalk.magenta('[Webpack] ') +
-    'Compiled' + chalk.grey(' [timestamp:' + Date.now() + ']'));
+    chalk.magenta('[Webpack]') +
+    ' Compiled' + chalk.grey(' [timestamp:' + Date.now() + ']')
+  );
+  // spawn nodemon process if it wasn't already spawned
+  if (!nodemon){
+    console.log(chalk.cyan('\nStarting nodemon...\n'));
+    nodemon = spawnNodemon(bundlePath);
+  }
 });

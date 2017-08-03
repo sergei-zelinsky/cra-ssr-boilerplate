@@ -32,11 +32,12 @@
     "build": "NODE_PATH='./src' react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "watch-ssr": "parallel -j 2 -- 'node scripts/watch-ssr.js' 'nodemon --delay 500ms build/server.js';",
+    "watch-ssr": "node scripts/watch-ssr.js",
     "build-ssr": "node scripts/build-ssr.js"
   },
   "devDependencies": {
     "http-proxy-middleware": "^0.17.4",
+    "nodemon": "^1.11.0",
     "redux-devtools": "^3.4.0",
     "redux-devtools-dock-monitor": "^1.1.2",
     "redux-devtools-log-monitor": "^1.3.0"
