@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import App from 'containers/App';
 import {StaticRouter, BrowserRouter} from 'react-router-dom';
+import ConnectedIntlProvider from 'containers/ConnectedIntlProvider';
 import DevTools from './DevTools';
 
 class Root extends Component {
@@ -40,7 +41,9 @@ class Root extends Component {
       <Provider store={store}>
         <div>
           <BrowserRouter>
-            <App/>
+            <ConnectedIntlProvider>
+              <App/>
+            </ConnectedIntlProvider>
           </BrowserRouter>
           {
             isDevToolsEnabled

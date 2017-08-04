@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom'
 import AsyncComponentResolver from 'containers/AsyncComponentResolver';
 import Helmet from 'react-helmet';
+import {FormattedMessage} from 'react-intl';
+import LocaleSwitcher from 'containers/LocaleSwitcher';
 import logo from './logo.svg';
 import './index.css';
 
@@ -25,6 +27,13 @@ class App extends Component {
           </div>
           <div className="App-intro">
             <SimpleCounter/>
+          </div>
+          <div>
+            <LocaleSwitcher/>
+            <h3>Translations</h3>
+            <div>
+              <FormattedMessage id="my_message_id"/>
+            </div>
           </div>
           <nav>
             <h3>Navigation</h3>
