@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {FormattedMessage} from 'react-intl';
 
 class SimpleCounter extends Component {
   componentWillMount(){
@@ -9,13 +10,17 @@ class SimpleCounter extends Component {
     const {value, onIncrement, onDecrement} = this.props;
     return (
       <div>
-        <h3>Here is a simple counter</h3>
-        <p>Counter value: {value}</p>
+        <h3>
+          <FormattedMessage id="simple_counter.title"/>
+        </h3>
+        <p>
+          <FormattedMessage id="simple_counter.current_value"/> {value}
+        </p>
         <button onClick={onIncrement}>
-          Increment
+          <FormattedMessage id="simple_counter.increment"/>
         </button>
         <button onClick={onDecrement}>
-          Decrement
+          <FormattedMessage id="simple_counter.decrement"/>
         </button>
       </div>
     );

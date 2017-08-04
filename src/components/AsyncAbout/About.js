@@ -1,16 +1,35 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Helmet from 'react-helmet';
+import {FormattedMessage, injectIntl} from 'react-intl';
 
-const About = ({match}) => (
-  <div>
-    <Helmet>
-      <title>About page title</title>
-      <meta property="og:title" content="About page title"/>
+class About extends Component {
+  render(){
+    const {match, intl} = this.props;
+    return (
+      <div>
+        <Helmet>
+          <title>
+            {intl.formatMessage({id: 'about.page_title'})}
+          </title>
+          <meta
+            property="og:title"
+            content={intl.formatMessage({id: 'about.page_title'})}
+          />
+        </Helmet>
+        <h2>
+          <FormattedMessage id="about.title"/>
+        </h2>
+        <p>
+          <FormattedMessage
+            id="about.description"
+            values={{
+              location: match.url
+            }}
+          />
+        </p>
+      </div>
+    );
+  }
+}
 
-    </Helmet>
-    <h2>About page</h2>
-    <p>You are on the About page: {match.url}</p>
-  </div>
-);
-
-export default About;
+export default injectIntl(About);

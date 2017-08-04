@@ -27,12 +27,14 @@ class Root extends Component {
       return (
         <Provider store={store}>
           <div>
-            <StaticRouter
-              location={url}
-              context={context}
-            >
-              <App/>
-            </StaticRouter>
+            <ConnectedIntlProvider>
+              <StaticRouter
+                location={url}
+                context={context}
+              >
+                <App/>
+              </StaticRouter>
+            </ConnectedIntlProvider>
           </div>
         </Provider>
       );
@@ -40,11 +42,11 @@ class Root extends Component {
     return (
       <Provider store={store}>
         <div>
-          <BrowserRouter>
-            <ConnectedIntlProvider>
+          <ConnectedIntlProvider>
+            <BrowserRouter>
               <App/>
-            </ConnectedIntlProvider>
-          </BrowserRouter>
+            </BrowserRouter>
+          </ConnectedIntlProvider>
           {
             isDevToolsEnabled
               ? <DevTools/>

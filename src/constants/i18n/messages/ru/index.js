@@ -1,3 +1,13 @@
+import app from './app.json';
+import simpleCounter from './simple-conter.json';
+import localeSwitcher from './locale-switcher.json';
+import home from './home.json';
+import about from './about.json';
+
 export default {
-  'my_message_id': 'Мое супер сообщение'
+  ...app,
+  ...simpleCounter,
+  ...localeSwitcher,
+  ...home,
+  ...about
 };

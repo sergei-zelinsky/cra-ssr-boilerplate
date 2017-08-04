@@ -5,6 +5,7 @@ export default props => `
   <html ${props.helmet.htmlAttributes.toString()}>
   <head>
     ${props.helmet.title.toString()}
+    <meta charset="UTF-8">
     ${props.helmet.meta.toString()}
     ${props.helmet.link.toString()}
     ${props.helmet.base.toString()}

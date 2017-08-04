@@ -1,14 +1,25 @@
 const MOCKED_PAGE_INFORMATION = {
   '/my-seo-friendly-url-for-home-page': {
-    page: 'Home'
+    page: 'Home',
+    locale: 'en'
+  },
+  '/ru/my-seo-friendly-url-for-home-page': {
+    page: 'Home',
+    locale: 'ru'
   },
   '/my-seo-friendly-url-for-about-page': {
-    page: 'About'
+    page: 'About',
+    locale: 'en'
+  },
+  '/ru/my-seo-friendly-url-for-about-page': {
+    page: 'About',
+    locale: 'ru'
   }
 };
 
 const DEFAULT_PAGE_INFORMATION = {
-  page: 'Home'
+  page: 'Home',
+  locale: 'en'
 };
 
 export default class PageInformationAPI {

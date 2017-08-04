@@ -7,41 +7,48 @@ import {
 } from 'react-router-dom'
 import AsyncComponentResolver from 'containers/AsyncComponentResolver';
 import Helmet from 'react-helmet';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, injectIntl} from 'react-intl';
 import LocaleSwitcher from 'containers/LocaleSwitcher';
 import logo from './logo.svg';
 import './index.css';
 
 class App extends Component {
   render() {
+    const {intl} = this.props;
     return (
       <div>
         <Helmet>
-          <title>CRA SSR Boilerplate page title</title>
+          <title>
+            {intl.formatMessage({id: 'app.page_title'})}
+          </title>
           <meta property="og:title" content="CRA SSR Boilerplate page title"/>
         </Helmet>
         <div className="App">
           <div className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to CRA SSR Boilerplate</h2>
+            <h2>
+              <FormattedMessage id="app.welcome"/>
+            </h2>
           </div>
           <div className="App-intro">
             <SimpleCounter/>
           </div>
           <div>
             <LocaleSwitcher/>
-            <h3>Translations</h3>
-            <div>
-              <FormattedMessage id="my_message_id"/>
-            </div>
           </div>
           <nav>
-            <h3>Navigation</h3>
+            <h3>
+              <FormattedMessage id="app.navigation"/>
+            </h3>
             <li>
-              <Link to="/my-seo-friendly-url-for-home-page">Home page</Link>
+              <Link to="/my-seo-friendly-url-for-home-page">
+                <FormattedMessage id="app.navigation.home_page"/>
+              </Link>
             </li>
             <li>
-              <Link to="/my-seo-friendly-url-for-about-page">About page</Link>
+              <Link to="/my-seo-friendly-url-for-about-page">
+                <FormattedMessage id="app.navigation.about_page"/>
+              </Link>
             </li>
           </nav>
         </div>
@@ -54,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default injectIntl(App);
