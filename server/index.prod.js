@@ -3,6 +3,8 @@ import express from 'express';
 import reactSSRMiddleware from './middlewares/reactSSRMiddleware';
 import path from 'path';
 
+const port = process.env.PORT || 4000;
+
 const app = express();
 
 const __ROOT_DIR__ = process.cwd();
@@ -12,9 +14,9 @@ app.use('/static', express.static(staticDirPath));
 
 app.get('*', reactSSRMiddleware);
 
-app.listen(4000, error => {
+app.listen(port, error => {
   if (error){
     throw error;
   }
-  console.log('[SSR] Running on port 4000. Open http://localhost:4000 in your browser.');
+  console.log(`[SSR] Running on port ${port}. Open http://localhost:${port} in your browser.`);
 });
