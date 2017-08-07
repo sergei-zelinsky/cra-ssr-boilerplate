@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import App from 'containers/App';
 import {StaticRouter, BrowserRouter} from 'react-router-dom';
+import ConnectedIntlProvider from 'containers/ConnectedIntlProvider';
 import DevTools from './DevTools';
 
 class Root extends Component {
@@ -26,12 +27,14 @@ class Root extends Component {
       return (
         <Provider store={store}>
           <div>
-            <StaticRouter
-              location={url}
-              context={context}
-            >
-              <App/>
-            </StaticRouter>
+            <ConnectedIntlProvider>
+              <StaticRouter
+                location={url}
+                context={context}
+              >
+                <App/>
+              </StaticRouter>
+            </ConnectedIntlProvider>
           </div>
         </Provider>
       );
@@ -39,9 +42,11 @@ class Root extends Component {
     return (
       <Provider store={store}>
         <div>
-          <BrowserRouter>
-            <App/>
-          </BrowserRouter>
+          <ConnectedIntlProvider>
+            <BrowserRouter>
+              <App/>
+            </BrowserRouter>
+          </ConnectedIntlProvider>
           {
             isDevToolsEnabled
               ? <DevTools/>

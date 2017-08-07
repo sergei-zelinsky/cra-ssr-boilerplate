@@ -1,0 +1,6 @@
+{
+  "simple_counter.title": "Просто счетчик",
+  "simple_counter.current_value": "Текущее значение счетчика:",
+  "simple_counter.increment": "Увеличить",
+  "simple_counter.decrement": "Уменьшить"
+}

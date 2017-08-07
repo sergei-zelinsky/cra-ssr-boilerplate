@@ -1,0 +1,9 @@
+{
+  "app.page_title": "CRA SSR Boilerplate Page Title",
+  "app.welcome": "Welcome to CRA SSR Boilerplate",
+  "app.navigation": "Navigation",
+  "app.navigation.home_page_en": "Home page [EN]",
+  "app.navigation.home_page_ru": "Home page [RU]",
+  "app.navigation.about_page_en": "About page [EN]",
+  "app.navigation.about_page_ru": "About page [RU]"
+}

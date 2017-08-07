@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SimpleCounter from 'containers/SimpleCounter';
 import {
   Route,
   Link,
@@ -7,32 +6,51 @@ import {
 } from 'react-router-dom'
 import AsyncComponentResolver from 'containers/AsyncComponentResolver';
 import Helmet from 'react-helmet';
+import {FormattedMessage, injectIntl} from 'react-intl';
 import logo from './logo.svg';
 import './index.css';
 
 class App extends Component {
   render() {
+    const {intl} = this.props;
     return (
       <div>
         <Helmet>
-          <title>CRA SSR Boilerplate page title</title>
+          <title>
+            {intl.formatMessage({id: 'app.page_title'})}
+          </title>
           <meta property="og:title" content="CRA SSR Boilerplate page title"/>
         </Helmet>
         <div className="App">
           <div className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to CRA SSR Boilerplate</h2>
-          </div>
-          <div className="App-intro">
-            <SimpleCounter/>
+            <h2>
+              <FormattedMessage id="app.welcome"/>
+            </h2>
           </div>
           <nav>
-            <h3>Navigation</h3>
+            <h3>
+              <FormattedMessage id="app.navigation"/>
+            </h3>
             <li>
-              <Link to="/my-seo-friendly-url-for-home-page">Home page</Link>
+              <Link to="/my-seo-friendly-url-for-home-page">
+                <FormattedMessage id="app.navigation.home_page_en"/>
+              </Link>
             </li>
             <li>
-              <Link to="/my-seo-friendly-url-for-about-page">About page</Link>
+              <Link to="/ru/my-seo-friendly-url-for-home-page">
+                <FormattedMessage id="app.navigation.home_page_ru"/>
+              </Link>
+            </li>
+            <li>
+              <Link to="/my-seo-friendly-url-for-about-page">
+                <FormattedMessage id="app.navigation.about_page_en"/>
+              </Link>
+            </li>
+            <li>
+              <Link to="/ru/my-seo-friendly-url-for-about-page">
+                <FormattedMessage id="app.navigation.about_page_ru"/>
+              </Link>
             </li>
           </nav>
         </div>
@@ -45,4 +63,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default injectIntl(App);

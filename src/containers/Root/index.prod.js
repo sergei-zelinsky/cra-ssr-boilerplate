@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import App from 'containers/App';
 import {StaticRouter, BrowserRouter} from 'react-router-dom';
+import ConnectedIntlProvider from 'containers/ConnectedIntlProvider';
 
 class Root extends Component {
   render(){
@@ -10,20 +11,24 @@ class Root extends Component {
     if (type === 'server'){
       return (
         <Provider store={store}>
-          <StaticRouter
-            location={url}
-            context={context}
-          >
-            <App/>
-          </StaticRouter>
+          <ConnectedIntlProvider>
+            <StaticRouter
+              location={url}
+              context={context}
+            >
+              <App/>
+            </StaticRouter>
+          </ConnectedIntlProvider>
         </Provider>
       );
     }
     return (
       <Provider store={store}>
-        <BrowserRouter>
-          <App/>
-        </BrowserRouter>
+        <ConnectedIntlProvider>
+          <BrowserRouter>
+            <App/>
+          </BrowserRouter>
+        </ConnectedIntlProvider>
       </Provider>
     );
   }

@@ -1,0 +1,9 @@
+{
+  "app.page_title": "CRA SSR Boilerplate Заголовок страницы",
+  "app.welcome": "Добро пожаловать в CRA SSR Boilerplate",
+  "app.navigation": "Навигация",
+  "app.navigation.home_page_en": "Главная страница [EN]",
+  "app.navigation.home_page_ru": "Главная страница [RU]",
+  "app.navigation.about_page_en": "О нас [EN]",
+  "app.navigation.about_page_ru": "О нас [RU]"
+}

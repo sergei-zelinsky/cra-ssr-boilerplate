@@ -8,13 +8,24 @@ import asyncBootstrapper from 'react-async-bootstrapper';
 import renderHTMLTemplate from '../template';
 import PageInformationAPI from 'services/PageInformationAPI';
 import Helmet from 'react-helmet';
+import {addLocaleData} from 'react-intl';
 
 async function reactSSRMiddleware(req, res){
   // fetch information about current url for supporting SEO-friendly URLs
   const pageInformation = await PageInformationAPI.fetchPageInformation(req.url);
 
+  const localeMessages = await import(`constants/i18n/messages/${pageInformation.locale}/index.js`).then(({default: messages}) => messages);
+
+  const reactIntlLocaleData = await import(`react-intl/locale-data/${pageInformation.locale}`);
+
+  addLocaleData(reactIntlLocaleData);
+
   const store = configureStore({
-    pageInformation
+    pageInformation,
+    i18n: {
+      locale: pageInformation.locale,
+      messages: localeMessages
+    }
   });
 
   const context = {};

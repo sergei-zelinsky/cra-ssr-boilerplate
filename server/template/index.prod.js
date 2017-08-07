@@ -15,7 +15,7 @@ export default props => `
     ${props.helmet.link.toString()}
     <link rel="manifest" href="/manifest.json">
     <link rel="shortcut icon" href="/favicon.ico">
-    <link href="${assetManifest['main.css']}" rel="stylesheet">
+    <link href="/${assetManifest['main.css']}" rel="stylesheet">
     ${props.helmet.style.toString()}
     ${props.helmet.script.toString()}
   </head>
@@ -26,7 +26,7 @@ export default props => `
     window.ASYNC_COMPONENTS_STATE = ${serialize(props.asyncState)}
   </script>
   <div id="root">${props.appString}</div>
-  <script type="text/javascript" src="${assetManifest['main.js']}"></script>
+  <script type="text/javascript" src="/${assetManifest['main.js']}"></script>
   </body>
   </html>
 `;

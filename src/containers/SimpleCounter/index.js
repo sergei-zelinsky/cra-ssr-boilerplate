@@ -4,7 +4,8 @@ import {increment, decrement, fetchInitialValue} from 'actions/simple-counter';
 
 function mapStateToSimpleCounterProps(state){
   return {
-    value: state.simpleCounter
+    value: state.simpleCounter,
+    locale: state.i18n.locale
   }
 }
 
