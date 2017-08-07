@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import {FormattedMessage, injectIntl} from 'react-intl';
+import SimpleCounter from 'containers/SimpleCounter';
 
 class Home extends Component {
   render(){
@@ -27,6 +28,9 @@ class Home extends Component {
             }}
           />
         </p>
+        <div>
+          <SimpleCounter/>
+        </div>
       </div>
     );
   }

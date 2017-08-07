@@ -21,6 +21,12 @@ export function* fetchPageInformation(action) {
     type: FETCH_PAGE_INFORMATION_SUCCESS,
     payload: pageInformation
   });
+  yield put({
+    type: SET_LOCALE,
+    payload: {
+      locale: pageInformation.locale
+    }
+  })
 }
 
 export function* fetchSimpleCounterInitialValue(){

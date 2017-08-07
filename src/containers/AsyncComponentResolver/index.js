@@ -8,12 +8,9 @@ function mapStateToProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-    fetchPageInformation: pathname => dispatch(fetchPageInformation(pathname))
-  };
-}
-
-const ConnectedAsyncComponentResolver = connect(mapStateToProps, mapDispatchToProps)(AsyncComponentResolver);
+const ConnectedAsyncComponentResolver = connect(
+  mapStateToProps, {
+  fetchPageInformation
+})(AsyncComponentResolver);
 
 export default ConnectedAsyncComponentResolver;

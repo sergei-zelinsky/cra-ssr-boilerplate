@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SimpleCounter from 'containers/SimpleCounter';
 import {
   Route,
   Link,
@@ -8,7 +7,6 @@ import {
 import AsyncComponentResolver from 'containers/AsyncComponentResolver';
 import Helmet from 'react-helmet';
 import {FormattedMessage, injectIntl} from 'react-intl';
-import LocaleSwitcher from 'containers/LocaleSwitcher';
 import logo from './logo.svg';
 import './index.css';
 
@@ -30,24 +28,28 @@ class App extends Component {
               <FormattedMessage id="app.welcome"/>
             </h2>
           </div>
-          <div className="App-intro">
-            <SimpleCounter/>
-          </div>
-          <div>
-            <LocaleSwitcher/>
-          </div>
           <nav>
             <h3>
               <FormattedMessage id="app.navigation"/>
             </h3>
             <li>
               <Link to="/my-seo-friendly-url-for-home-page">
-                <FormattedMessage id="app.navigation.home_page"/>
+                <FormattedMessage id="app.navigation.home_page_en"/>
+              </Link>
+            </li>
+            <li>
+              <Link to="/ru/my-seo-friendly-url-for-home-page">
+                <FormattedMessage id="app.navigation.home_page_ru"/>
               </Link>
             </li>
             <li>
               <Link to="/my-seo-friendly-url-for-about-page">
-                <FormattedMessage id="app.navigation.about_page"/>
+                <FormattedMessage id="app.navigation.about_page_en"/>
+              </Link>
+            </li>
+            <li>
+              <Link to="/ru/my-seo-friendly-url-for-about-page">
+                <FormattedMessage id="app.navigation.about_page_ru"/>
               </Link>
             </li>
           </nav>
