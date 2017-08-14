@@ -4,7 +4,7 @@ Simple demo of server-side rendered application which is using create-react-app 
 
 ## Features
 
-- [react-router v4](https://github.com/ReactTraining/react-router) + code-splitting (thanks to [ctrlplusb](https://github.com/ctrlplusb) for his [react-async-component](https://github.com/ctrlplusb/react-async-component))
+- [react-router v4](https://github.com/ReactTraining/react-router) + code-splitting (inspired by [react-async-component](https://github.com/ctrlplusb/react-async-component) and [react-universal-component](https://github.com/faceyspacey/react-universal-component))
 - SEO-friendly URLs
 - [redux](https://github.com/reactjs/redux)
 - [redux-saga](https://github.com/redux-saga/redux-saga)
