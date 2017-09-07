@@ -21,7 +21,7 @@
     "react-intl": "^2.3.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.2",
-    "react-scripts": "1.0.10",
+    "react-scripts": "1.0.13",
     "redux": "^3.7.2",
     "redux-saga": "^0.15.4",
     "serialize-javascript": "^1.4.0",
@@ -35,7 +35,7 @@
     "eject": "react-scripts eject",
     "watch-ssr": "node scripts/watch-ssr.js",
     "build-ssr": "node scripts/build-ssr.js",
-    "build-all": "npm run build && npm run build-ssr"
+    "build-all": "yarn run build && yarn run build-ssr"
   },
   "devDependencies": {
     "http-proxy-middleware": "^0.17.4",
