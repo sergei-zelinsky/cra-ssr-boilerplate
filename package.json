@@ -35,7 +35,9 @@
     "eject": "react-scripts eject",
     "watch-ssr": "node scripts/watch-ssr.js",
     "build-ssr": "node scripts/build-ssr.js",
-    "build-all": "yarn run build && yarn run build-ssr"
+    "build-all": "yarn run build && yarn run build-ssr",
+    "heroku-postbuild": "yarn run build-all",
+    "heroku-start": "node build/server.js"
   },
   "devDependencies": {
     "http-proxy-middleware": "^0.17.4",
